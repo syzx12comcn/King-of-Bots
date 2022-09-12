@@ -15,6 +15,9 @@ public class AddController {
 
     @PostMapping("user/bot/add/")
     public Map<String, String> add(@RequestParam Map<String, String> data) {
+//        for (Map.Entry<String, String> entry: data.entrySet()) {
+//            System.out.println(entry.getKey() + "||" + entry.getValue());
+//        }
         return addService.add(data);
     }
 }

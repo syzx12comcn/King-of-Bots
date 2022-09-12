@@ -8,8 +8,6 @@ import UserAccountLoginView from '../views/user/account/UserAccountLoginView'
 import UserAccountRegisterView from '../views/user/account/UserAccountRegisterView'
 import store from '../store/index'
 
-
-
 const routes = [
   {
     path: "/",
@@ -79,8 +77,6 @@ const routes = [
     path: "/:catchAll(.*)",
     redirect: "/404/"
   }
-
-
 ]
 
 const router = createRouter({
@@ -97,4 +93,3 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router
-
