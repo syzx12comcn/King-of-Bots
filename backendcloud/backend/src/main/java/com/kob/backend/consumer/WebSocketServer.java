@@ -61,19 +61,16 @@ public class WebSocketServer {
 
         if (this.user != null) {
             users.put(userId, this);
-            System.out.println("connected!");
         }
         else {
             this.session.close();
         }
-
-        System.out.println(users);
+        //System.out.println(users);
     }
 
     @OnClose
     public void onClose() {
         // 关闭链接
-        System.out.println("disconnected!");
         if (this.user != null) {
             users.remove(this.user.getId());
         }
@@ -125,7 +122,6 @@ public class WebSocketServer {
 
     }
     private void startMatching(Integer botId) {
-        System.out.println("start matching");
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("user_id", this.user.getId().toString());
         data.add("rating", this.user.getRating().toString());
@@ -134,13 +130,11 @@ public class WebSocketServer {
 
     }
     private void stopMatching() {
-        System.out.println("stop matching");
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("user_id", this.user.getId().toString());
         restTemplate.postForObject(removePlayerUrl, data, String.class);
     }
     private void move(Integer dir) {
-        System.out.println("move " + dir);
         if (game.getPlayerA().getId().equals(user.getId())) {
             if (game.getPlayerA().getBotId().equals(-1))//亲自出马
                 game.setNextStepA(dir);
@@ -153,7 +147,6 @@ public class WebSocketServer {
     @OnMessage
     public void onMessage(String message, Session session) {//路由
         // 从Client接收消息
-        System.out.println("receive msg!");
         JSONObject data = JSONObject.parseObject(message);
         String event = data.getString("event");
         if ("start-matching".equals(event)) {
