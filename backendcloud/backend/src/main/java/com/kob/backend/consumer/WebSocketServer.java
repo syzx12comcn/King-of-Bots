@@ -34,9 +34,9 @@ public class WebSocketServer {
     private Session session = null;
     public Game game = null;
 
-    private static UserMapper userMapper;
+    public static UserMapper userMapper;
     public static RecordMapper recordMapper;
-    private static BotMapper botMapper;
+    public static BotMapper botMapper;
     @Autowired
     public void setUserMapper(UserMapper userMapper){
         WebSocketServer.userMapper = userMapper;
@@ -140,6 +140,7 @@ public class WebSocketServer {
         restTemplate.postForObject(removePlayerUrl, data, String.class);
     }
     private void move(Integer dir) {
+        System.out.println("move " + dir);
         if (game.getPlayerA().getId().equals(user.getId())) {
             if (game.getPlayerA().getBotId().equals(-1))//亲自出马
                 game.setNextStepA(dir);
